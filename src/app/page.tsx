@@ -1,10 +1,12 @@
 export default function Home() {
   return (
-    <div className="grid grid-cols-2 gap-4">
-      <div className="bg-white p-4 shadow-lg rounded-lg">About Me</div>
-      <div className="bg-white p-4 shadow-lg rounded-lg">Services</div>
-      <div className="bg-blue-500 text-white p-4 shadow-lg rounded-lg">Hire Me</div>
-      <div className="bg-white p-4 shadow-lg rounded-lg">Projects</div>
+    <div className="min-h-screen bg-gray-50 py-10">
+      <section className="grid gap-6 md:grid-cols-3 max-w-5xl mx-auto">
+        <div className="bg-white p-6 rounded-xl shadow-lg">About&nbsp;Me</div>
+        <div className="bg-white p-6 rounded-xl shadow-lg">Services</div>
+        <div className="bg-blue-600 p-6 rounded-xl shadow-lg text-white">Hire&nbsp;Me</div>
+        <div className="bg-white p-6 rounded-xl shadow-lg">Projects</div>
+      </section>
     </div>
   );
 }

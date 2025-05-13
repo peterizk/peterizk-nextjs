@@ -23,7 +23,7 @@ export default function ContactWidget() {
       </a>
 
       {/* GitHub */}
-      <a 
+      <a
         href="https://github.com/peterizk"
         target="_blank"
         rel="noreferrer"
