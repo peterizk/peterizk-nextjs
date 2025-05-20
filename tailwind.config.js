@@ -9,9 +9,13 @@ module.exports = {
         brand: {
           DEFAULT: "#1f78c1",
           dark: "#14548b",
+          light:  "#3ea8ff",
         },
       },
     },
   },
-  plugins: [],
+plugins: [
+  require("@tailwindcss/typography"),
+  require("@tailwindcss/aspect-ratio"),
+],
 };

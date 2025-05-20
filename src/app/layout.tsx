@@ -1,12 +1,12 @@
 // src/app/layout.tsx
-import "@/styles/globals.css";
+import "@styles/globals.css";
 import Header from "@components/Header";
 import Footer from "@components/Footer";
 import ContactWidget from "@components/ContactWidget";
 import type { ReactNode } from "react";
 
 export const metadata = {
-  title: "Peter Rizk – Solution Architect",
+  title: "Peter Rizk - Solution Architect",
   description: "Portfolio, services, and contact portal for Peter Rizk.",
 };
 
