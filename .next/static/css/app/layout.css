@@ -1,0 +1,63 @@
+/*!********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[12].use[3]!./src/styles/globals.css ***!
+  \********************************************************************************************************************************************************************************************************************************************************************/
+*{margin:0;box-sizing:border-box}
+
+:root{
+  --brand:#1f78c1;--brand-dark:#14548b;--brand-light:#3ea8ff;--accent:#ff7f50;
+  font-family:system-ui,sans-serif
+}
+
+body{background:#f3f4f6;color:#1f2937}
+
+.container{max-width:64rem;margin-inline:auto;padding:2rem;display:flex;gap:1.5rem}
+.sidebar{width:16rem;background:var(--brand);color:#fff;border-radius:.75rem;padding:1.5rem}
+.mainpanel{flex:1 1;background:#fff;border-radius:.75rem;box-shadow:0 0 12px rgba(0,0,0,.06)}
+
+.hero{position:relative;height:14rem;overflow:hidden;border-radius:.75rem}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero .overlay{position:absolute;inset:0;background:rgba(0,0,0,.5)}
+.hero h1,.hero p{position:relative;color:#fff;margin-left:2rem}
+
+.grid{display:grid;grid-gap:1.5rem;gap:1.5rem}
+@media(min-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.grid{grid-template-columns:repeat(3,1fr)}}
+
+.card{position:relative;padding-top:75%;border-radius:.75rem;overflow:hidden;
+      box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.card:hover img{transform:scale(1.05)}
+.card .shade{position:absolute;inset:0;background:rgba(0,0,0,.3);transition:.3s}
+.card:hover .shade{background:rgba(0,0,0,.45)}
+.card .content{position:absolute;inset:0;display:flex;flex-direction:column;
+               align-items:center;justify-content:center;text-align:center;color:#fff}
+.card h2{font-size:1.1rem;margin-bottom:.25rem}.card p{font-size:.7rem;opacity:.9}
+.hire{background:var(--accent)}.hire:hover{background:#ffa07a}
+
+.contact-stick{position:fixed;top:35%;right:1.5rem;display:flex;flex-direction:column;gap:.8rem;z-index:50}
+.contact-btn{width:3rem;height:3rem;display:flex;align-items:center;justify-content:center;
+             border-radius:50%;background:var(--brand);color:#fff;text-decoration:none}
+.contact-btn:hover{background:var(--brand-light)}
+/* already present base / layout rules … */
+
+/* === new utility classes moved from inline styles =============== */
+.flex          { display:flex }
+.gap-6         { gap:1.5rem }
+.mt-6          { margin-top:1.5rem }
+.text-sm       { font-size:14px }
+.text-xs       { font-size:12px }
+.text-white    { color:#fff }
+.text-brand    { color:var(--brand-light) }
+.no-underline  { text-decoration:none }
+
+/* spacing helpers for nav + grid */
+.nav-col       { display:flex; flex-direction:column; gap:12px; }
+.grid-top      { margin-top:1.5rem }
+
+/* outline helper (delete if you like) */
+.debug-outline { outline:3px dashed lime }
+.hidden { display: none !important; }
+/* project cards without background image */
+.project          { background: var(--brand-dark); }
+.project .content { color: #fff; }
+
