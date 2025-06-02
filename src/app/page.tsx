@@ -33,8 +33,8 @@ export default function Home() {
           fill
         />
         <div className="overlay" />
-        <h1>Building Scalable Digital Experiences</h1>
-        <p>Consulting • Implementation • Innovation</p>
+        <h1>Architecting Scalable Digital Experiences</h1>
+        <p>Consulting • Solution Architecture • Engineering Excellence • Business Insight</p>
       </div>
 
       <section className="grid grid-top">
@@ -47,7 +47,7 @@ export default function Home() {
         <Card
           title="Services"
           href="/services"
-          sub="AEM migration & strategy"
+          sub="Strategy & delivery"
           src="https://picsum.photos/seed/services/400/300"
         />
         <a

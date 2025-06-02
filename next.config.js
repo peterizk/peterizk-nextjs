@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
-export default {
-  images: {
-    remotePatterns: [{ protocol: 'https', hostname: 'picsum.photos' }]
-  }
+const nextConfig = {
+  output: 'export',
+  images: { unoptimized: true }, // export can't optimise on-the-fly
+  basePath: '',                  // leave empty because you serve from root
 };
+export default nextConfig;

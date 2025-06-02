@@ -67,7 +67,7 @@ const services: Service[] = [
       'Stakeholder facilitation and change management',
       'Vendor selection & RFP leadership',
     ],
-    tools: ['SAFe', 'Confluence', 'Miro', 'Figma'],
+    tools: ['SAFe', 'Confluence', 'Miro', 'Figma', 'Jira'],
   },
 ];
 
