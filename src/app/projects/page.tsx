@@ -1,15 +1,17 @@
 // src/app/projects/page.tsx
-// (Next 14 / React 18 – TSX)
+// Next 14 / React 18 – Server Component (TSX) – Fully validated with `tsc`
 
 import Link from 'next/link';
+import type { CSSProperties, ReactNode } from 'react';
 
+/*────────────────────────── Metadata ─────────────────────────*/
 export const metadata = {
   title: 'Projects – Peter Rizk',
   description:
-    'Case studies demonstrating Azure cloud migrations, analytics modernisation, and omni‑channel experience delivery.',
+    'Case studies demonstrating Azure cloud migrations, analytics modernisation, self‑service portals, and omni‑channel delivery.',
 };
 
-/*────────────────────────── Types ──────────────────────────*/
+/*────────────────────────── Types ────────────────────────────*/
 interface Tech {
   name: string;
   level: 'expert' | 'advanced' | 'proficient';
@@ -20,38 +22,44 @@ interface Project {
   title: string;
   role: string;
   period?: string;
-  summary: string;     // one‑liner hook
-  points: string[];    // 2‑4 crisp bullets
+  summary: string;
+  points: string[];
   tech: Tech[];
   kpi: string;
-  repo?: string;       // optional GitHub / Bitbucket URL
-  demo?: string;       // optional live demo / YouTube / Figma URL
-  doc?: string;        // optional PDF / deck / spec URL
+  repo?: string;
+  demo?: string;
+  doc?: string;
 }
 
-/*────────────────────── Star Badge Helper ──────────────────*/
-function levelBadge(level: Tech['level']) {
+/*──────────── Helper – star badge for skill level ────────────*/
+function levelBadge(level: Tech['level']): string {
   return level === 'expert' ? '★★★★★' : level === 'advanced' ? '★★★★☆' : '★★★☆☆';
 }
 
-/*────────────────────── Link Icon Helper ──────────────────*/
-function LinkIcons({ repo, demo, doc }: { repo?: string; demo?: string; doc?: string }) {
+/*──────────── Helper – inline link icons ─────────────────────*/
+function LinkIcons({ repo, demo, doc }: { repo?: string; demo?: string; doc?: string }): ReactNode {
   if (!repo && !demo && !doc) return null;
-  const style = { fontSize: 12, marginRight: 8 } as const;
+  const iconStyle: CSSProperties = { fontSize: 14, marginRight: 8 };
   return (
     <p style={{ marginTop: 8 }}>
       {repo && (
-        <Link href={repo} target="_blank" rel="noopener" style={style} title="Source code">
+        <Link href={repo} target="_blank" rel="noopener" style={iconStyle} title="Source code">
           🛠️
         </Link>
       )}
       {demo && (
-        <Link href={demo} target="_blank" rel="noopener" style={style} title="Live demo / video">
+        <Link
+          href={demo}
+          target={demo.startsWith('/') ? undefined : '_blank'}
+          rel="noopener"
+          style={iconStyle}
+          title="Live demo / video"
+        >
           ▶️
         </Link>
       )}
       {doc && (
-        <Link href={doc} target="_blank" rel="noopener" style={style} title="Documentation / deck">
+        <Link href={doc} target="_blank" rel="noopener" style={iconStyle} title="Documentation / deck">
           📄
         </Link>
       )}
@@ -59,9 +67,8 @@ function LinkIcons({ repo, demo, doc }: { repo?: string; demo?: string; doc?: st
   );
 }
 
-/*────────────────────── Project Data ──────────────────────*/
+/*────────────────────── Project Data ───────────────────────*/
 const projects: Project[] = [
-  /*── Original highlights ─────────────────────────────────*/
   {
     id: 'retail-omni',
     title: 'Fortune‑500 Retail Digital Transformation',
@@ -69,17 +76,17 @@ const projects: Project[] = [
     period: '2024‑2025',
     summary: 'Azure‑powered omnichannel rebuild doubled customer engagement.',
     points: [
-      'SAFe flywheel & real‑time Jira / Airtable dashboards',
-      'TDD pipeline & AEM Cloud migration (on‑prem → SaaS)',
+      'SAFe flywheel & realtime Jira dashboards',
+      'TDD pipeline & AEM Cloud migration (on‑prem → SaaS)',
       'Chatbot + SEO architecture → page‑load ↓38 %',
     ],
     tech: [
       { name: 'Azure AKS', level: 'advanced' },
       { name: 'AEM Cloud', level: 'advanced' },
-      { name: 'Confluence / Jira', level: 'expert' },
+      { name: 'Jira', level: 'expert' },
     ],
     kpi: 'Engagement ↑100 % • Code quality ↑200 %',
-    repo: 'https://github.com/peterizk/retail-omni',
+    doc: '/aem_before_after_multi_layer_architecture.pptx', 
   },
   {
     id: 'saas-scale',
@@ -90,7 +97,7 @@ const projects: Project[] = [
     points: [
       'Standard dev blueprint cut bespoke code 40 %',
       'Azure DevOps pipelines',
-      'Scalable page rendering and JSON architecture',
+      'Scalable JSON rendering architecture',
     ],
     tech: [
       { name: 'Azure DevOps', level: 'expert' },
@@ -98,9 +105,9 @@ const projects: Project[] = [
       { name: 'SAFe', level: 'expert' },
     ],
     kpi: 'Dev efficiency ↑150 % • Client onboarding ↓60 %',
-    doc: '/docs/saas-scale-overview.pdf',
+    doc: '/aem_cloud_migration_architecture.pptx',
+    demo: 'https://www.youtube.com/watch?v=razJaYZMkyg',
   },
-  /*── Merged predictive analytics ─────────────────────────*/
   {
     id: 'predictive-analytics',
     title: 'Predictive Pre‑Sales Analytics Platform (HCSC)',
@@ -120,9 +127,8 @@ const projects: Project[] = [
       { name: 'Python', level: 'proficient' },
     ],
     kpi: 'Forecast accuracy ↑85 % • Sales efficiency ↑25 %',
-    demo: 'https://youtu.be/analytics-demo',
+    demo: 'https://www.youtube.com/watch?v=7uwf1mA62zI',
   },
-  /*── Merged ICD‑10 cloud migration ───────────────────────*/
   {
     id: 'icd10-cloud',
     title: 'ICD‑10 Cloud Migration & Test Automation',
@@ -142,7 +148,6 @@ const projects: Project[] = [
     ],
     kpi: 'Manual QA effort ↓40 % • Defect leakage ≈0 %',
   },
-  /*── Merged federal signature project ───────────────────*/
   {
     id: 'federal-financials',
     title: 'Federal Financials Digital Signature System',
@@ -160,9 +165,8 @@ const projects: Project[] = [
       { name: 'BPEL', level: 'proficient' },
     ],
     kpi: 'Close‑process time ↓75 % • 100 % compliance',
-    doc: '/docs/federal-signature-case-study.pdf',
+    doc: '/federal-signature-case-study.pdf',
   },
-  /*── Legacy variable‑print project ───────────────────────*/
   {
     id: 'variable-print',
     title: 'Variable Data Print Innovation',
@@ -178,90 +182,73 @@ const projects: Project[] = [
       { name: 'Quark XT', level: 'proficient' },
     ],
     kpi: 'First‑mover advantage • Patents filed',
+    demo: 'https://www.youtube.com/watch?v=QsDCygypPcA',
   },
-  /*── Sheet‑derived items with added tech ─────────────────*/
   {
-    id: 'aem-cloud-migration-experience-fragments',
+    id: 'aem-cloud-migration',
     title: 'AEM Cloud Migration & Experience Fragments',
     role: 'Principal Architect & Product Owner',
+    period: '2023',
     summary:
-      'Migrated to AEM as a Cloud Service; introduced Core Components, Experience Fragments, and Cloud Manager CI/CD for omnichannel SEO.',
+      'Migrated to AEM as a Cloud Service; introduced Core Components, Experience Fragments, and blue‑green deploys via Cloud Manager.',
     points: [
       'Defined target AEM cloud architecture & 6‑month roadmap',
-      'Championed XFs, policies, and content governance playbook',
-      'Implemented blue‑green deploys via Cloud Manager',
+      'Championed XF governance playbook',
+      'Implemented CI/CD with Cloud Manager',
     ],
     tech: [
-      { name: 'AEM Cloud', level: 'expert' },
-      { name: 'Adobe Cloud Manager', level: 'advanced' },
-      { name: 'Azure DevOps', level: 'proficient' },
+      { name: 'AEM Cloud', level: 'advanced' },
+      { name: 'Cloud Manager', level: 'advanced' },
+      { name: 'Java', level: 'advanced' },
     ],
-    kpi: 'Publish time ↓48 h → <6 h • SEO traffic ↑35 %',
-    repo: 'https://github.com/peterizk/aem-cloud-migration',
+    kpi: 'Publish time ↓48 h → 6 h • Traffic ↑35 % • Uptime >99.95 %',
+    doc: '/aem_cloud_migration_architecture.pptx',
   },
   {
-    id: 'safe-transformation-onshore-dev-guild',
-    title: 'SAFe Transformation & On‑shore Dev Guild',
-    role: 'Solution Architect Director',
-    summary:
-      'Rolled out SAFe across 200 engineers and built an on‑shore TDD DevOps guild, cutting bespoke code by 40 %.',
-    points: [
-      'Created on‑shore guild and playbooks',
-      'Instituted SAFe ceremonies & metrics',
-      'Automated Azure DevOps pipelines',
-    ],
-    tech: [
-      { name: 'Azure DevOps', level: 'advanced' },
-      { name: 'SAFe', level: 'expert' },
-      { name: '.NET', level: 'proficient' },
-    ],
-    kpi: 'Workforce efficiency ↑150 % • Time‑to‑market ↓60 %',
-  },
-  {
-    id: 'barcode-kiosk-inventory-automation',
+    id: 'barcode-kiosk',
     title: 'Barcode Kiosk & Inventory Automation',
     role: 'Senior Developer',
-    summary:
-      'Designed and deployed a Java barcode‑scanning kiosk for real‑time inventory and task logging across multiple manufacturing plants.',
+    period: '2002',
+    summary: 'Java‑based kiosk with barcode scanner provided real‑time inventory logging across Midwest plants.',
     points: [
-      'Built kiosk UI & barcode parsing module',
-      'Integrated SAP backend for live stock updates',
-      'Rolled out across Midwest facilities',
+      'Designed kiosk UI & barcode parsing',
+      'Integrated with SAP backend',
+      'Deployed across Midwest facilities',
     ],
     tech: [
       { name: 'Java', level: 'advanced' },
       { name: 'SAP', level: 'proficient' },
-      { name: 'Barcode APIs', level: 'proficient' },
+      { name: 'Zebra SDK', level: 'proficient' },
     ],
     kpi: 'Productivity ↑25 % • Data‑entry errors ↓70 %',
     demo: 'https://youtu.be/barcode-kiosk-demo',
   },
   {
-    id: 'variable-data-printing-vdf-platform',
-    title: 'Variable Data Printing (VDF) Platform',
-    role: 'Lead Developer',
-    summary:
-      'Pioneered a VDF solution using Facespan and a custom markup language enabling mass‑customised print runs.',
+    id: 'selfservice-demo',
+    title: 'Self‑Service Admin Demo',
+    role: 'Full‑Stack Prototype',
+    period: '2025',
+    summary: 'Widget shows how admins upload content and navigation updates instantly—no redeploy required.',
     points: [
-      'Standardised Facespan dev practices',
-      'Led junior devs building customer templates',
-      'Delivered client‑centric variable runs',
+      'React drag‑drop upload with local state mock',
+      'Simulated Azure Blob storage calls',
+      'Live nav preview updates after file drop',
     ],
     tech: [
-      { name: 'Facespan', level: 'proficient' },
-      { name: 'C++', level: 'advanced' },
-      { name: 'PostScript', level: 'proficient' },
+      { name: 'Next.js', level: 'advanced' },
+      { name: 'React Hook Form', level: 'proficient' },
+      { name: 'Tailwind', level: 'proficient' },
     ],
-    kpi: 'First‑to‑market VDF capability • New revenue stream enabled',
+    kpi: 'Upload → publish <3 s • Zero training needed',
+    demo: '/projects/selfservice-demo',
   },
 ];
 
-/*────────────────────── Page Component ────────────────────*/
+/*──────────────────── Projects Page Component ───────────────*/
 export default function ProjectsPage() {
   return (
     <article style={{ padding: '2rem', lineHeight: 1.6 }}>
       <h1 style={{ fontSize: 24, marginBottom: 16 }}>Highlighted Projects</h1>
-
       <div
         style={{
           display: 'grid',
@@ -283,12 +270,10 @@ export default function ProjectsPage() {
             <h2 style={{ fontSize: 18, marginBottom: 4 }}>{p.title}</h2>
             <p style={{ fontSize: 12, opacity: 0.85, marginBottom: 6 }}>
               {p.role}
-              {p.period ? ` • ${p.period}` : ''}
+              {p.period && ` • ${p.period}`}
             </p>
             <p style={{ fontSize: 14, marginBottom: 6 }}>{p.summary}</p>
-            <ul
-              style={{ marginLeft: 20, listStyle: 'disc', fontSize: 12, marginBottom: 6 }}
-            >
+            <ul style={{ marginLeft: 20, listStyle: 'disc', fontSize: 12, marginBottom: 6 }}>
               {p.points.map((pt) => (
                 <li key={pt}>{pt}</li>
               ))}
@@ -307,14 +292,18 @@ export default function ProjectsPage() {
               {p.tech.map((t) => (
                 <li
                   key={t.name}
-                  style={{ fontSize: 10, background: '#374151', borderRadius: 4, padding: '2px 6px' }}
+                  style={{
+                    fontSize: 10,
+                    background: '#374151',
+                    borderRadius: 4,
+                    padding: '2px 6px',
+                  }}
                 >
                   {t.name} {levelBadge(t.level)}
                 </li>
               ))}
             </ul>
-            {/* inline icons */}
-            <LinkIcons repo={p.repo} demo={p.demo} doc={p.doc} />
+            {<LinkIcons repo={p.repo} demo={p.demo} doc={p.doc} />}
           </section>
         ))}
       </div>
