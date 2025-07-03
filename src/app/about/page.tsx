@@ -64,7 +64,7 @@ export default function AboutPage() {
         </div>
         <div>
           <h3 style={{ fontSize: 16 }}>Microsoft Office Expert</h3>
-          <p>All office tools and <strong>Excel wizardry</strong></p>
+          <p>All office tools and <strong>Excel wizardry.</strong></p>
         </div>
       </div>
 
